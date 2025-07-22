@@ -1,17 +1,17 @@
 
 import React, { useState } from 'react'
 import { FileUploader } from '@/components/features/FileUploader'
-import { PdfViewer } from '@/components/features/PdfViewer'
-import { ChatInterface } from '@/components/features/ChatInterface'
-import { AnalysisPanel } from '@/components/features/AnalysisPanel'
+import { EnhancedPdfViewer } from '@/components/features/EnhancedPdfViewer'
+import { EnhancedChatInterface } from '@/components/features/EnhancedChatInterface'
+import { EnhancedAnalysisPanel } from '@/components/features/EnhancedAnalysisPanel'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export function HomePage() {
-  const [fileId, setFileId] = useState<string | null>(null)
+  const [fileId, setFileId] = useState<number | null>(null)
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
 
   const handleFileUploaded = (id: string, url: string) => {
-    setFileId(id)
+    setFileId(parseInt(id))
     setPdfUrl(url)
   }
 
@@ -25,30 +25,23 @@ export function HomePage() {
 
   return (
     <div className="h-full flex">
-      <div className="flex-1 border-r border-border">
-        <PdfViewer url={pdfUrl} />
+      <div className="flex-1">
+        <EnhancedPdfViewer fileId={fileId} url={pdfUrl} />
       </div>
       
-      <div className="w-96 flex flex-col">
+      <div className="w-96 flex flex-col border-l">
         <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-          <TabsList className="grid w-full grid-cols-3 m-4 mb-2">
+          <TabsList className="grid w-full grid-cols-2 m-4 mb-2">
             <TabsTrigger value="chat">Chat</TabsTrigger>
             <TabsTrigger value="analysis">Analysis</TabsTrigger>
-            <TabsTrigger value="summary">Summary</TabsTrigger>
           </TabsList>
           
           <TabsContent value="chat" className="flex-1 m-0">
-            <ChatInterface fileId={fileId} />
+            <EnhancedChatInterface fileId={fileId} />
           </TabsContent>
           
-          <TabsContent value="analysis" className="flex-1 m-0 p-4">
-            <AnalysisPanel fileId={fileId} />
-          </TabsContent>
-          
-          <TabsContent value="summary" className="flex-1 m-0 p-4">
-            <div className="text-center text-muted-foreground">
-              Summary functionality coming soon...
-            </div>
+          <TabsContent value="analysis" className="flex-1 m-0">
+            <EnhancedAnalysisPanel fileId={fileId} />
           </TabsContent>
         </Tabs>
       </div>
