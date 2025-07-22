@@ -1,10 +1,7 @@
 
 import React, { useState } from 'react'
 import { FileUploader } from '@/components/features/FileUploader'
-import { EnhancedPdfViewer } from '@/components/features/EnhancedPdfViewer'
-import { EnhancedChatInterface } from '@/components/features/EnhancedChatInterface'
-import { EnhancedAnalysisPanel } from '@/components/features/EnhancedAnalysisPanel'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PdfViewer } from '@/components/features/PdfViewer'
 
 export function HomePage() {
   const [fileId, setFileId] = useState<number | null>(null)
@@ -26,24 +23,13 @@ export function HomePage() {
   return (
     <div className="h-full flex">
       <div className="flex-1">
-        <EnhancedPdfViewer fileId={fileId} url={pdfUrl} />
+        <PdfViewer url={pdfUrl} />
       </div>
       
-      <div className="w-96 flex flex-col border-l">
-        <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-          <TabsList className="grid w-full grid-cols-2 m-4 mb-2">
-            <TabsTrigger value="chat">Chat</TabsTrigger>
-            <TabsTrigger value="analysis">Analysis</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="chat" className="flex-1 m-0">
-            <EnhancedChatInterface fileId={fileId} />
-          </TabsContent>
-          
-          <TabsContent value="analysis" className="flex-1 m-0">
-            <EnhancedAnalysisPanel fileId={fileId} />
-          </TabsContent>
-        </Tabs>
+      <div className="w-96 border-l bg-card p-4">
+        <div className="text-center text-muted-foreground">
+          <p>Chat and analysis features coming soon...</p>
+        </div>
       </div>
     </div>
   )
