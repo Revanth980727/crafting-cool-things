@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+pdfplumber
+python-docx
+python-pptx
+openai==0.28
+chromadb
+sqlalchemy
+loguru
+httpx
+python-dotenv 

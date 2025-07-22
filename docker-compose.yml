@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    volumes:
+      - ./backend/app:/app/app
+      - ./data/chromadb:/app/chromadb
+      - ./data/sqlite:/app/sqlite
+    ports:
+      - "8000:8000"
+    depends_on:
+      - chromadb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  chromadb:
+    image: chromadb/chroma
+    volumes:
+      - ./data/chromadb:/chroma/chroma
+    ports:
+      - "8001:8000" 
