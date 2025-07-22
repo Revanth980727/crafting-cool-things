@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { FileUploader } from '@/components/features/FileUploader'
 import { PdfViewer } from '@/components/features/PdfViewer'
+import { ChatInterface } from '@/components/features/ChatInterface'
 
 export function HomePage() {
   const [fileId, setFileId] = useState<number | null>(null)
@@ -26,10 +27,8 @@ export function HomePage() {
         <PdfViewer url={pdfUrl} />
       </div>
       
-      <div className="w-96 border-l bg-card p-4">
-        <div className="text-center text-muted-foreground">
-          <p>Chat and analysis features coming soon...</p>
-        </div>
+      <div className="w-96 border-l">
+        <ChatInterface fileId={fileId} />
       </div>
     </div>
   )
