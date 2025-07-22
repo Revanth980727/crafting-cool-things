@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react'
 import { Upload, FileText, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import { cn } from '@/lib/utils'
 
 interface FileUploaderProps {
   onFileUploaded: (fileId: string, url: string) => void
@@ -91,52 +92,62 @@ export function FileUploader({ onFileUploaded }: FileUploaderProps) {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6">
+    <div className="max-w-lg mx-auto p-8 animate-fade-in">
       <div
-        className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+        className={cn(
+          "border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-300 hover-lift modern-card",
           dragActive 
-            ? 'border-primary bg-primary/10' 
-            : 'border-muted-foreground/25 hover:border-muted-foreground/50'
-        }`}
+            ? 'border-primary bg-gradient-accent backdrop-blur-sm' 
+            : 'border-border/50 hover:border-primary/50'
+        )}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
       >
         {file ? (
-          <div className="space-y-4">
-            <FileText className="h-12 w-12 mx-auto text-primary" />
+          <div className="space-y-6 animate-scale-in">
+            <div className="relative">
+              <FileText className="h-16 w-16 mx-auto text-primary animate-pulse-slow" />
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-primary rounded-full flex items-center justify-center">
+                <span className="text-xs text-white font-bold">✓</span>
+              </div>
+            </div>
             <div>
-              <p className="font-medium">{file.name}</p>
-              <p className="text-sm text-muted-foreground">
-                {(file.size / 1024 / 1024).toFixed(2)} MB
+              <p className="font-semibold text-lg text-foreground">{file.name}</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {(file.size / 1024 / 1024).toFixed(2)} MB • PDF Document
               </p>
             </div>
             <Button 
               onClick={handleUpload} 
               disabled={loading}
-              className="w-full"
+              className="w-full py-6 text-lg font-medium bg-gradient-primary hover:shadow-modern-lg transition-all duration-300 hover:scale-105"
+              size="lg"
             >
               {loading ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Processing...
+                  <Loader2 className="h-5 w-5 mr-3 animate-spin" />
+                  Processing Document...
                 </>
               ) : (
                 <>
-                  <Upload className="h-4 w-4 mr-2" />
+                  <Upload className="h-5 w-5 mr-3" />
                   Upload & Process
                 </>
               )}
             </Button>
           </div>
         ) : (
-          <div className="space-y-4">
-            <Upload className="h-12 w-12 mx-auto text-muted-foreground" />
-            <div>
-              <p className="text-lg font-medium">Upload PDF Document</p>
-              <p className="text-sm text-muted-foreground">
-                Drag and drop your PDF here, or click to browse
+          <div className="space-y-6">
+            <div className="relative">
+              <Upload className="h-20 w-20 mx-auto text-muted-foreground/60" />
+              <div className="absolute inset-0 bg-gradient-accent rounded-full blur-xl opacity-30 animate-pulse-slow"></div>
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-2xl font-bold gradient-text">Upload PDF Document</h3>
+              <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                Drag and drop your PDF here, or click to browse your files
               </p>
             </div>
             <input
@@ -146,9 +157,9 @@ export function FileUploader({ onFileUploaded }: FileUploaderProps) {
               className="hidden"
               id="file-upload"
             />
-            <Button asChild variant="outline">
-              <label htmlFor="file-upload" className="cursor-pointer">
-                Browse Files
+            <Button asChild variant="outline" size="lg" className="px-8 py-6 hover:shadow-modern transition-all duration-300 hover:scale-105 bg-white/90">
+              <label htmlFor="file-upload" className="cursor-pointer font-medium">
+                Choose File
               </label>
             </Button>
           </div>
