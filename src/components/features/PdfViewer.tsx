@@ -25,42 +25,41 @@ export function PdfViewer({ url }: PdfViewerProps) {
   return (
     <div className="h-full flex flex-col">
       {/* PDF Toolbar */}
-      <div className="flex items-center gap-3 p-4 border-b border-border/30 bg-card/50 backdrop-blur-sm animate-fade-in">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3 p-4 border-b border-gray-200 bg-white">
+        <div className="flex items-center gap-3">
           <div className="relative">
-            <Search className="h-4 w-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <Input 
-              placeholder="Search in document..." 
-              className="w-64 pl-10 h-10 bg-background/80 border-border/50 focus:border-primary/50 rounded-lg"
+              placeholder="Search" 
+              className="w-48 pl-10 h-9 bg-gray-50 border-gray-200 focus:border-gray-300 rounded-md text-sm"
             />
           </div>
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="gap-2 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 h-9 px-3"
+          >
+            <Wand2 className="h-4 w-4" />
+            Explain math & table
+          </Button>
         </div>
         
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="gap-2 bg-gradient-to-r from-purple-50 to-indigo-50 text-purple-700 border-purple-200 hover:from-purple-100 hover:to-indigo-100 transition-all duration-300 hover:scale-105"
-        >
-          <Wand2 className="h-4 w-4" />
-          Explain math & table
-        </Button>
-        
-        <div className="flex items-center gap-1 ml-auto bg-accent/30 p-1 rounded-lg">
-          <Button variant="ghost" size="sm" className="hover:bg-white/60 transition-all duration-200">
+        <div className="flex items-center gap-2 ml-auto">
+          <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100">
+            <Search className="h-4 w-4" />
+          </Button>
+          <span className="text-sm px-2 py-1 bg-gray-100 rounded text-gray-700">128%</span>
+          <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100">
             <ZoomOut className="h-4 w-4" />
           </Button>
-          <span className="text-sm px-3 py-1 bg-background/80 rounded font-medium">128%</span>
-          <Button variant="ghost" size="sm" className="hover:bg-white/60 transition-all duration-200">
+          <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100">
             <ZoomIn className="h-4 w-4" />
           </Button>
-          <div className="h-4 w-px bg-border/50 mx-1"></div>
-          <Button variant="ghost" size="sm" className="hover:bg-white/60 transition-all duration-200">
+          <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100">
             <RotateCw className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="sm" className="hover:bg-white/60 transition-all duration-200">
-            <Download className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="sm" className="hover:bg-white/60 transition-all duration-200">
+          <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100">
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </div>

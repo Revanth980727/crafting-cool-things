@@ -22,12 +22,12 @@ export function HomePage() {
   }
 
   return (
-    <div className="h-full flex">
+    <div className="h-full flex bg-gray-50">
       <div className="flex-1">
         <PdfViewer url={pdfUrl} />
       </div>
       
-      <div className="w-96 border-l">
+      <div className="w-96">
         <ChatInterface fileId={fileId} />
       </div>
     </div>
